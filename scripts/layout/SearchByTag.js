@@ -69,7 +69,7 @@ const displayActiveFilter = (menu, selected, nameId) => {
     );
     if (!searchTagActiveBtntextContents.includes(target.textContent)) {
       const crossFilterSelected = document.createElement("img");
-      crossFilterSelected.src = "../images/cross-round.svg";
+      crossFilterSelected.src = "images/cross-round.svg";
       crossFilterSelected.alt = "Croix d'annulation du filtre sélectionné";
       crossFilterSelected.classList.add("search-tag-menu-selected-cross");
       searchTagMenuIngredientsSelected.appendChild(target);
@@ -78,7 +78,7 @@ const displayActiveFilter = (menu, selected, nameId) => {
       nouvelElement.classList.add("search-tag-active-button");
       nouvelElement.setAttribute("id", nameId + target.id.substring(2));
       const nouvelImage = document.createElement("img");
-      nouvelImage.src = "../images/cross-filter.svg";
+      nouvelImage.src = "images/cross-filter.svg";
       nouvelImage.alt = "Croix d'annulation du filtre";
       nouvelElement.textContent = target.textContent;
       nouvelElement.appendChild(nouvelImage);
@@ -182,7 +182,7 @@ displayListTagAppareils.display();
 
 const displayListTagUstensiles = new DisplayListTag(
   "#ustensiles-menu",
-  new UstensilesApi("/les-petits-plats/data/recipe.json"),
+  new UstensilesApi("/data/recipe.json"),
   "us"
 );
 displayListTagUstensiles.display();
