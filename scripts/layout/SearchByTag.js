@@ -168,21 +168,21 @@ class DisplayListTag {
 
 const displayListTagIngredient = new DisplayListTag(
   "#ingredients-menu",
-  new IngredientsApi("/data/recipe.json"),
+  new IngredientsApi("../data/recipe.json"),
   "in"
 );
 displayListTagIngredient.display();
 
 const displayListTagAppareils = new DisplayListTag(
   "#appareils-menu",
-  new AppareilsApi("/data/recipe.json"),
+  new AppareilsApi("../data/recipe.json"),
   "ap"
 );
 displayListTagAppareils.display();
 
 const displayListTagUstensiles = new DisplayListTag(
   "#ustensiles-menu",
-  new UstensilesApi("/data/recipe.json"),
+  new UstensilesApi("../data/recipe.json"),
   "us"
 );
 displayListTagUstensiles.display();
