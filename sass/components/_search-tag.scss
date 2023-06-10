@@ -1,0 +1,166 @@
+.search-tag {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  height: 106px;
+  &-container {
+    display: flex;
+  }
+  &-item {
+    margin-top: 25px;
+    flex-direction: column;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    align-content: center;
+    width: 195px;
+    height: 56px;
+    border-radius: 11px;
+    background-color: #fff;
+    margin-right: 40px;
+    transition: height 0.4s ease-in-out;
+    clip-path: polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%);
+  }
+  &-toggle {
+    cursor: pointer;
+  }
+  &-button {
+    width: 100%;
+    padding: 16px;
+    border: none;
+    outline: none;
+    background-color: #fff;
+    border-radius: 11px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  &-title {
+    font-family: "Manrope", sans-serif;
+    font-size: 16px;
+    font-weight: 500;
+    color: #1b1b1b;
+  }
+  &-menus {
+    width: 100%;
+    overflow-y: auto;    
+    max-height: 236px;
+    &::-webkit-scrollbar {
+      display: none; /* Masque les barres de défilement dans les navigateurs WebKit (Chrome, Safari) */
+    }
+  }
+  &-menu {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+    width: 195px;
+    height: auto;
+    background-color: #fff;
+    opacity: 0.8;
+    border-radius: 0px 0px 11px 11px;
+    & ul {
+      width: 100%;
+      overflow-y: auto;
+      scrollbar-width: none;
+      padding-left: 0px;
+      text-align: left;
+      margin-bottom: 0px;
+      margin-top: 10px;
+      &::-webkit-scrollbar {
+        display: none; /* Masque les barres de défilement dans les navigateurs WebKit (Chrome, Safari) */
+      }
+      & li {
+        width: 100%;
+        padding-left: 16px;
+        font-size: 14px;
+        font-family: "Manrope", sans-serif;
+        font-weight: 400;
+        color: #1b1b1b;
+        list-style: none;
+        line-height: 36px;
+        cursor: pointer;
+        &:hover {
+          background-color: #ffd15b;
+        }
+      }
+    }
+    &-selected {
+      & li {
+        position: relative;
+        background-color: #ffd15b;
+        margin-bottom: 2px;
+        &:hover {
+          font-weight: 700;
+          & img {
+            opacity: 1;
+          }
+        }
+      }
+      &-cross {
+        position: absolute;
+        top: 50%;
+        right: 5%;
+        opacity: 0;
+        transform: translate(0%, -50%);
+      }
+    }
+    &-yellow {
+      background-color: #ffd15b;
+      &:hover {
+        font-weight: 700;
+      }
+    }
+  }
+  &-loop {
+    position: absolute;
+    top: 12px;
+    right: 25px;
+  }
+  &-slogan {
+    font-family: "anton", sans-serif;
+    margin-top: 36px;
+    font-size: 21px;
+  }
+  &-filter {
+    width: 163px;
+    height: 36px;
+    caret-color: #7a7a7a;
+    color: #7a7a7a;
+    border: 1px solid #7a7a7a;
+    border-radius: 2px;
+    padding-left: 10px;
+    &:focus {
+      outline: none;
+    }
+  }
+  &-clear-icon {
+    position: absolute;
+    top: 15px;
+    right: 47px;
+    cursor: pointer;
+    display: none;
+  }
+}
+
+@keyframes down {
+  from {
+    transform: translateY(0px);
+    color: rgba(255, 255, 255, 0);
+  }
+  to {
+    transform: translateY(29px);
+    color: rgba(255, 255, 255, 1);
+  }
+}
+
+@keyframes up {
+  from {
+    transform: translateY(0px);
+    color: rgba(255, 255, 255, 1);
+  }
+  to {
+    transform: translateY(-86px);
+    color: rgba(255, 255, 255, 0);
+  }
+}

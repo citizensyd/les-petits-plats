@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Anton&family=Manrope&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="sass/main.css" />
+    <title>Les petits plats</title>
+  </head>
+  <body>
+    <header class="header">
+      <img class="header-logo" src="images/Logo.svg" alt="Logo du site" />
+      <h1 class="header-title">
+        cherchez parmi plus de 1500 recettes<br />
+        du quotidien,simples et délicieuses
+      </h1>
+      <form>
+        <div class="search">
+          <input
+            type="text"
+            id="search-input"
+            name="query"
+            placeholder="Rechercher une recette, un ingrédient, ..."
+          />
+          <img
+            class="clear-icon"
+            src="images/cross.svg"
+            alt="Croix d'effacement du texte"
+          />
+          <button type="submit" class="search-button">
+            <img
+              id="search-button-image"
+              src="images/loop-grey.svg"
+              alt="Bouton de recherche"
+            />
+          </button>
+        </div>
+      </form>
+    </header>
+    <main>
+      <section class="search-tag-recipes">
+        <section class="search-tag">
+          <div class="search-tag-container">
+            <div class="search-tag-item" id="ingredients">
+              <button class="search-tag-button">
+                <span class="search-tag-title">Ingrédients</span>
+                <img
+                  class="search-tag-toggle"
+                  src="../images/arrowTag.svg"
+                  alt="Flèche du menu"
+                />
+              </button>
+              <div class="search-tag-menu">
+                <input type="text" class="search-tag-filter" />
+                <img
+                  class="search-tag-clear-icon"
+                  src="images/cross-tag.svg"
+                  alt="Croix d'effacement du texte"
+                />
+                <img
+                  class="search-tag-loop"
+                  src="../images/loop-small.svg"
+                  alt="loupe pour symboliser la recherche"
+                />
+                <div class="search-tag-menus">
+                  <ul
+                    class="search-tag-menu-selected"
+                    id="ingredients-selected"
+                  ></ul>
+                  <ul class="search-tag-menu" id="ingredients-menu"></ul>
+                </div>
+              </div>
+            </div>
+            <div class="search-tag-item" id="appareils">
+              <button class="search-tag-button">
+                <span class="search-tag-title">Appareils</span>
+                <img
+                  class="search-tag-toggle"
+                  src="../images/arrowTag.svg"
+                  alt="Flèche du menu"
+                />
+              </button>
+              <div class="search-tag-menu">
+                <input type="text" class="search-tag-filter" />
+                <img
+                  class="search-tag-clear-icon"
+                  src="images/cross-tag.svg"
+                  alt="Croix d'effacement du texte"
+                />
+                <img
+                  class="search-tag-loop"
+                  src="../images/loop-small.svg"
+                  alt="loupe pour symboliser la recherche"
+                />
+                <div class="search-tag-menus">
+                  <ul
+                    class="search-tag-menu-selected"
+                    id="appareils-selected"
+                  ></ul>
+                  <ul class="search-tag-menu" id="appareils-menu"></ul>
+                </div>
+              </div>
+            </div>
+            <div class="search-tag-item" id="ustensiles">
+              <button class="search-tag-button">
+                <span class="search-tag-title">Ustensiles</span>
+                <img
+                  class="search-tag-toggle"
+                  src="../images/arrowTag.svg"
+                  alt="Flèche du menu"
+                />
+              </button>
+              <div class="search-tag-menu">
+                <input type="text" class="search-tag-filter" />
+                <img
+                  class="search-tag-clear-icon"
+                  src="images/cross-tag.svg"
+                  alt="Croix d'effacement du texte"
+                />
+                <img
+                  class="search-tag-loop"
+                  src="../images/loop-small.svg"
+                  alt="loupe pour symboliser la recherche"
+                />
+                <div class="search-tag-menus">
+                  <ul
+                    class="search-tag-menu-selected"
+                    id="ustensiles-selected"
+                  ></ul>
+                  <ul class="search-tag-menu" id="ustensiles-menu"></ul>
+                </div>
+              </div>
+            </div>
+          </div>
+          <span class="search-tag-slogan">1500 recettes</span>
+        </section>
+        <section class="search-tag-active"></section>
+        <section class="recipes"></section>
+      </section>
+    </main>
+    <script type="module" src="scripts/layout/Search.js"></script>
+    <script type="module" src="scripts/layout/SearchByTag.js"></script>
+    <script type="module" src="scripts/layout/Recipe.js"></script>
+    <script type="module" src="scripts/pages/Index.js"></script>
+    <script type="module" src="scripts/factories/RecipeCard.js"></script>
+    <script type="module" src="scripts/layout/FilterTag.js"></script>
+  </body>
+</html>

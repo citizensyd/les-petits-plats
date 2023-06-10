@@ -1,0 +1,20 @@
+.search-tag-active{
+    display: flex;
+    width: 100%;
+    height: auto;
+    flex-wrap: wrap;
+    &-button {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        font-family: "Manrope", sans-serif;
+        font-size: 14px;
+        font-weight: 400;
+        width: 203px;
+        height: 53px;
+        background-color:#FFD15B;
+        border-radius: 10px;
+        padding: 18px;
+        cursor: pointer;
+    }
+}

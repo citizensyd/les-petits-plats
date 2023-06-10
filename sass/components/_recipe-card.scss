@@ -1,0 +1,59 @@
+.recipe-card {
+  width: 380px;
+  height: 731px;
+  overflow: hidden;
+  border-radius: 21px;
+  background-color: #fff;
+  margin-bottom: 66px;
+  & section {
+    padding: 30px;
+  }
+  & img {
+    width: 100%;
+    height: 253px;
+    object-fit: cover;
+  }
+  & h2 {
+    margin-bottom: 30px;
+    font-family: "Anton", sans-serif;
+    font-size: 18px;
+    font-weight: 400;
+  }
+  & h3 {
+    margin-bottom: 20px;
+
+    font-family: "Manrope", sans-serif;
+    font-size: 12px;
+    font-weight: 700;
+    color: #7a7a7a;
+  }
+  &-recette {
+    max-height: 85px;
+    overflow: hidden;
+    margin-bottom: 30px;
+    font-family: "Manrope", sans-serif;
+    font-size: 14px;
+    font-weight: 500;
+    color: #1b1b1b;
+  }
+  &-ingredients {
+    display: flex;
+    flex-wrap: wrap;
+    & div {
+        width: 50%;
+        margin-bottom: 20px;
+    }
+    & span{
+        font-family: "Manrope", sans-serif;
+        font-size: 14px;
+        font-weight: 400;
+        color: #7A7A7A;
+    }
+    & p{
+        font-family: "Manrope", sans-serif;
+        font-size: 14px;
+        font-weight: 500;
+        color: #1b1b1b;
+    }
+  }
+}
