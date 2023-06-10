@@ -38,7 +38,7 @@ searchTagContainer.addEventListener("input", (event) => {
   handleSearchTagInput(event);
 });
 
-class filterTag {
+/* class filterTag {
   constructor() {
     this.IngredientsApi = new IngredientsApi("/data/recipe.json");
     this.AppareilsApi = new AppareilsApi("/data/recipe.json");
@@ -67,6 +67,6 @@ allLitagFilter.forEach(li, () => {
   tagArray.push(li);
 });
 
-console.log(tagArray);
+console.log(tagArray); */
 
 export { handleSearchTagInput };
