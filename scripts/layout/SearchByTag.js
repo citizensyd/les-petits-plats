@@ -4,22 +4,14 @@ import { UstensilesApi } from "../api/Api.js";
 import { handleSearchTagInput } from "./FilterTag.js";
 
 // unscreen filter tag
-const unscreenFilterTag = (
-  identifiantSelected,
-  identifiantMenu,
-  idActive,
-  idLi
-) => {
+const unscreenFilterTag = (identifiantSelected, identifiantMenu, idActive, idLi) => {
   const listMenuSelected = document.querySelector(identifiantSelected);
   const listMenu = document.querySelector(identifiantMenu);
   const searchTagActive = document.querySelector(".search-tag-active");
 
   const removeFilterFromLi = (target) => {
     const idNumber = target.closest("li").id.substring(2);
-    console.log(idNumber);
-    console.log(idActive);
-    console.log(`${idActive}${idNumber}`);
-    const btnIn = searchTagActive.querySelector(`${idActive}${idNumber}`);
+    const btnIn = searchTagActive.querySelector(`#${idActive}${idNumber}`);
     btnIn.remove();
     listMenu.appendChild(target.closest("li"));
     target.remove();
@@ -27,17 +19,17 @@ const unscreenFilterTag = (
 
   const removeFilterFromActive = (target) => {
     const idNumber = target.closest("div").id.substring(5);
-    console.log(idNumber);
-
-    const btnIn = listMenuSelected.querySelector(`${idLi}${idNumber}`);
+    const btnIn = listMenuSelected.querySelector(`#${idLi}${idNumber}`);
     btnIn.querySelector(".search-tag-menu-selected-cross").click();
   };
 
   const handleFilterRemoval = (event) => {
     const target = event.target;
+    const targetDiv = target.closest("div");
+    const targetId = targetDiv.id.substring(0, 5);;
     if (target.matches(".search-tag-menu-selected-cross")) {
       removeFilterFromLi(target);
-    } else if (target.matches("img")) {
+    } else if (targetId === idActive){
       removeFilterFromActive(target);
     }
   };
@@ -45,14 +37,9 @@ const unscreenFilterTag = (
   listMenuSelected.addEventListener("click", handleFilterRemoval);
   searchTagActive.addEventListener("click", handleFilterRemoval);
 };
-unscreenFilterTag(
-  "#ingredients-selected",
-  "#ingredients-menu",
-  "#btnIn",
-  "#in"
-);
-unscreenFilterTag("#appareils-selected", "#appareils-menu", "#btnAp", "#ap");
-unscreenFilterTag("#ustensiles-selected", "#ustensiles-menu", "#btnUs", "#us");
+unscreenFilterTag("#ingredients-selected", "#ingredients-menu", "btnIn", "in");
+unscreenFilterTag("#appareils-selected", "#appareils-menu", "btnAp", "ap");
+unscreenFilterTag("#ustensiles-selected", "#ustensiles-menu", "btnUs", "us");
 
 // Display active tag filter
 const displayActiveFilter = (menu, selected, nameId) => {
@@ -60,13 +47,9 @@ const displayActiveFilter = (menu, selected, nameId) => {
   listIngredients.addEventListener("click", (event) => {
     const searchTagMenuIngredientsSelected = document.querySelector(selected);
     const sectionFilter = document.querySelector(".search-tag-active");
-    const searchTagActiveBtn = sectionFilter.querySelectorAll(
-      ".search-tag-active-button"
-    );
+    const searchTagActiveBtn = sectionFilter.querySelectorAll(".search-tag-active-button");
     const target = event.target;
-    const searchTagActiveBtntextContents = Array.from(searchTagActiveBtn).map(
-      (element) => element.textContent
-    );
+    const searchTagActiveBtntextContents = Array.from(searchTagActiveBtn).map((element) => element.textContent);
     if (!searchTagActiveBtntextContents.includes(target.textContent)) {
       const crossFilterSelected = document.createElement("img");
       crossFilterSelected.src = "images/cross-round.svg";
@@ -103,9 +86,7 @@ const menuTag = () => {
     if (target.matches(".search-tag-toggle")) {
       const index = Array.from(btnDrop).indexOf(target);
       if (toggleIndex === 0) {
-        searchTagItems[
-          index
-        ].style.height = `${searchTagItems[index].scrollHeight}px`;
+        searchTagItems[index].style.height = `${searchTagItems[index].scrollHeight}px`;
         target.style.transform = "rotate(180deg)";
         toggleIndex++;
       } else {
@@ -122,23 +103,17 @@ const inputCross = () => {
   const searchTagContainer = document.querySelector(".search-tag-container");
 
   searchTagContainer.addEventListener("input", (event) => {
-    const clearIconTag = event.target
-      .closest("div")
-      .querySelector(".search-tag-clear-icon");
+    const clearIconTag = event.target.closest("div").querySelector(".search-tag-clear-icon");
     clearIconTag.style.display = event.target.value ? "block" : "none";
   });
 
   searchTagContainer.addEventListener("click", (event) => {
     if (event.target.className === "search-tag-clear-icon") {
-      const input = event.target
-        .closest("div")
-        .querySelector(".search-tag-filter");
+      const input = event.target.closest("div").querySelector(".search-tag-filter");
       input.value = "";
       event.target.style.display = "none";
       console.log(event.target.closest("div"));
-      const idMenu = event.target
-        .closest("div")
-        .querySelector("[id*=menu]");
+      const idMenu = event.target.closest("div").querySelector("[id*=menu]");
       console.log(idMenu);
       handleSearchTagInput(event);
     }
@@ -148,8 +123,10 @@ inputCross();
 
 class DisplayListTag {
   constructor(menuSelector, api, idPrefix) {
+    console.log(api);
     this.menuSelector = menuSelector;
     this.api = api;
+    console.log(this.api);
     this.idPrefix = idPrefix;
   }
 
@@ -165,24 +142,25 @@ class DisplayListTag {
     });
   }
 }
+let apiAdress = null;
 
-const displayListTagIngredient = new DisplayListTag(
-  "#ingredients-menu",
-  new IngredientsApi("/les-petits-plats/data/recipe.json"),
-  "in"
-);
+const apiMotor = () => {
+  const url = window.location.href;
+  if (url.includes("citizensyd")) {
+    return apiAdress = "/les-petits-plats/data/recipe.json";
+  } else {
+    return apiAdress = "/data/recipe.json";
+  }
+};
+apiMotor();
+
+const displayListTagIngredient = new DisplayListTag("#ingredients-menu", new IngredientsApi(apiAdress), "in");
 displayListTagIngredient.display();
 
-const displayListTagAppareils = new DisplayListTag(
-  "#appareils-menu",
-  new AppareilsApi("/les-petits-plats/data/recipe.json"),
-  "ap"
-);
+const displayListTagAppareils = new DisplayListTag("#appareils-menu", new AppareilsApi(apiAdress), "ap");
 displayListTagAppareils.display();
 
-const displayListTagUstensiles = new DisplayListTag(
-  "#ustensiles-menu",
-  new UstensilesApi("/data/recipe.json"),
-  "us"
-);
+const displayListTagUstensiles = new DisplayListTag("#ustensiles-menu", new UstensilesApi(apiAdress), "us");
 displayListTagUstensiles.display();
+
+export { apiMotor };

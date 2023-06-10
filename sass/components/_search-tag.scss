@@ -45,6 +45,7 @@
     width: 100%;
     overflow-y: auto;    
     max-height: 236px;
+    border-radius: 0px 0px 11px 11px;
     &::-webkit-scrollbar {
       display: none; /* Masque les barres de défilement dans les navigateurs WebKit (Chrome, Safari) */
     }

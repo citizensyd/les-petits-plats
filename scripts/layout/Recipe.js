@@ -1,8 +1,11 @@
 import { RecipesApi } from "../api/Api.js";
 import { RecipeCard } from "../factories/RecipeCard.js";
+import { apiMotor } from "./SearchByTag.js";
 
 const DisplayRecipes = async () => {
-  const recipesApi = new RecipesApi("/les-petits-plats/data/recipe.json");
+  const apiAdress = apiMotor();
+  console.log(apiAdress);
+  const recipesApi = new RecipesApi(apiAdress);
   const recipes = await recipesApi.getRecipes();
   recipes.forEach((element) => {
     new RecipeCard(element);
