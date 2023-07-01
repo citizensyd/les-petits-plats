@@ -371,6 +371,7 @@ input:not(:placeholder-shown) + .clear-icon {
 }
 
 .recipe-card {
+  position: relative;
   width: 380px;
   height: 731px;
   overflow: hidden;
@@ -380,6 +381,20 @@ input:not(:placeholder-shown) + .clear-icon {
 }
 .recipe-card section {
   padding: 30px;
+}
+.recipe-card-time {
+  top: 27px;
+  right: 28px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  font-family: "Manrope", sans-serif;
+  background-color: #ffd15b;
+  font-size: 12px;
+  width: 90px;
+  height: 37px;
+  border-radius: 45px;
 }
 .recipe-card img {
   width: 100%;

@@ -15,6 +15,7 @@ class RecipeCard {
     const htmlContentCard = `
       <article class="recipe-card" id="${this.id}">
         <img src="images/photo/${this.image}" alt="${this.title}">
+        <div class="recipe-card-time">${this.time}min</div>
         <section>
           <h2>${this.title}</h2>
           <h3>RECETTE</h3>

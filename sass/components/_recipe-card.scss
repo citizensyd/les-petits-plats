@@ -1,4 +1,5 @@
 .recipe-card {
+  position: relative;
   width: 380px;
   height: 731px;
   overflow: hidden;
@@ -7,6 +8,20 @@
   margin-bottom: 66px;
   & section {
     padding: 30px;
+  }
+  &-time {
+    top: 27px;
+    right: 28px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    font-family: "Manrope", sans-serif;
+    background-color: #ffd15b;
+    font-size: 12px;
+    width: 90px;
+    height: 37px;
+    border-radius: 45px;
   }
   & img {
     width: 100%;
