@@ -30,5 +30,5 @@ index.displayAllRecipes().then(() => {
 
   new UnscreenFilterTag(index.recipeInstance,);
 
-  new PrincipalFilter(index.recipeInstance, index.filterTagInstance);
+/*   new PrincipalFilter(index.recipeInstance, index.filterTagInstance); */
 });

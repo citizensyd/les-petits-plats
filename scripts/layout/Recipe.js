@@ -132,48 +132,15 @@ class Recipe {
     console.log(this.principalArrayCard.length > 0);
     console.log(this.principalArrayCard.length === 0); 
     console.log(!this.principalArrayCard.includes("null"));*/
-    if (this.precedentArray.length === 1 && this.principalArrayCard.includes("null")) {
-      return this.displayNoresult();
-    } else if (
-      this.precedentArray.length === 1 &&
-      this.principalArrayCard.length === 0 &&
-      !this.principalArrayCard.includes("null")
-    ) {
+    if (this.precedentArray.length === 1) {
       this.filterTagInstance.filterMenuItemsExclude(this.precedentArray[0]);
       this.DisplayRecipes(this.precedentArray[0]);
-    } else if (
-      this.precedentArray.length > 1 &&
-      this.principalArrayCard.length === 0 &&
-      !this.principalArrayCard.includes("null")
-    ) {
+    } else if (this.precedentArray.length > 1) {
       const result = referenceArray.filter((element) => {
         return this.precedentArray.every((array) => array.some((item) => item.id === element.id));
       });
       this.filterTagInstance.filterMenuItemsExclude(result);
       this.DisplayRecipes(result);
-    } else if (
-      this.precedentArray.length === 1 &&
-      this.principalArrayCard.length > 0 &&
-      !this.principalArrayCard.includes("null")
-    ) {
-      const result = referenceArray.filter((element) => {
-        return this.principalArrayCard.some((item) => item.id === element.id);
-      });
-      this.filterTagInstance.filterMenuItemsExclude(result);
-      this.DisplayRecipes(result);
-    } else if (
-      this.precedentArray.length > 1 &&
-      this.principalArrayCard.length > 0 &&
-      !this.principalArrayCard.includes("null")
-    ) {
-      const result1 = referenceArray.filter((element) => {
-        return this.precedentArray.every((array) => array.some((item) => item.id === element.id));
-      });
-      const result2 = result1.filter((element) => {
-        return this.principalArrayCard.some((item) => item.id === element.id);
-      });
-      this.filterTagInstance.filterMenuItemsExclude(result2);
-      this.DisplayRecipes(result2);
     }
   }
 }
