@@ -1,72 +1,75 @@
-import { IngredientsApi } from "../api/Api.js";
-import { AppareilsApi } from "../api/Api.js";
-import { UstensilesApi } from "../api/Api.js";
-
-const filterMenuItems = (element, input, searchTagItems) => {
-  const filter = input.toLowerCase();
-  element.forEach((item) => {
-    const text = item.textContent.toLowerCase();
-    if (text.includes(filter)) {
-      item.style.display = "block";
-    } else if (filter === "") {
-      item.style.display = "block";
-    } else {
-      item.style.display = "none";
-    }
-    searchTagItems.style.height = "fit-content";
-  });
-};
-
-//
-const handleSearchTagInput = (event) => {
-  let input;
-  if (event.target.tagName === "INPUT") {
-    input = event.target.value.trim();
-    console.log(input);
-  } else {
-    input = event.target.closest("div").querySelector("input").value.trim();
-  }
-  const test = event.target.closest("div");
-  const element = test.querySelectorAll("[id*=menu] li");
-  const searchTagItems = event.target.closest(".search-tag-item");
-  console.log(searchTagItems);
-  filterMenuItems(element, input, searchTagItems);
-};
-
-const searchTagContainer = document.querySelector(".search-tag-container");
-searchTagContainer.addEventListener("input", (event) => {
-  handleSearchTagInput(event);
-});
-
-/* class filterTag {
+class FilterTag {
   constructor() {
-    this.IngredientsApi = new IngredientsApi("/data/recipe.json");
-    this.AppareilsApi = new AppareilsApi("/data/recipe.json");
-    this.UstensilesApi = new UstensilesApi("/data/recipe.json");
+    this.searchTagContainer = document.querySelector(".search-tag-container");
+    this.allLi = null;
+    this.allLiArrayId = [];
+    this.searchTagContainer.addEventListener("input", (event) => {
+      this.handleSearchTagInput(event);
+    });
   }
 
-   async arrayTagFilter() {
-    this.IngredientsApi.getData
+  // Unscreen element li in menu tag if no include in input
+  filterMenuItems(element, input) {
+    const filter = input.toLowerCase();
+    element.forEach((item) => {
+      const text = item.textContent.toLowerCase();
+      if (text.includes(filter)) {
+        item.style.display = "block";
+      } else if (filter === "") {
+        item.style.display = "block";
+      } else {
+        item.style.display = "none";
+      }
+    });
   }
 
+  // Select correct input menu and send to unscreen li
+  handleSearchTagInput(event) {
+    let input;
+    if (event.target.tagName === "INPUT") {
+      input = event.target.value.trim();
+    } else {
+      input = event.target.closest("div").querySelector("input").value.trim();
+    }
 
+    const test = event.target.closest("div");
+    const element = test.querySelectorAll("[id*=menu] li");
 
+    this.filterMenuItems(element, input);
+  }
+
+  // Unscreen element li in menu tag if no include in input
+  filterMenuItemsExclude(array) {
+    this.allLiArrayId = [];
+    this.allLi = this.searchTagContainer.querySelectorAll("li");
+    this.allLi.forEach((li) => {
+      const text = li.textContent.toLowerCase();
+      array.forEach((recipe) => {
+        for (const ingredient of recipe.ingredients) {
+          if (ingredient.ingredient.toLowerCase().match(text)) {
+            if (!this.allLiArrayId.includes(li.id)) {
+              this.allLiArrayId.push(li.id);
+            }
+          }
+        }
+        if (recipe.name.toLowerCase().match(text)) {
+          if (!this.allLiArrayId.includes(li.id)) {
+            this.allLiArrayId.push(li.id);
+          }
+        } else if (recipe.description.toLowerCase().match(text)) {
+          if (!this.allLiArrayId.includes(li.id)) {
+            this.allLiArrayId.push(li.id);
+          }
+        }
+      });
+    });
+    this.allLi.forEach((item) => {
+      if (this.allLiArrayId.includes(item.id)) {
+        item.style.display = "block";
+      } else {
+        item.style.display = "none";
+      }
+    });
+  }
 }
-
-new filterTag;
-
-const searchTagContainer2 = document.querySelector(".search-tag-container");
-console.log(searchTagContainer2);
-
-const allLitagFilter = searchTagContainer2.querySelectorAll("li");
-console.log(allLitagFilter);
-
-const tagArray = [];
-
-allLitagFilter.forEach(li, () => {
-  tagArray.push(li);
-});
-
-console.log(tagArray); */
-
-export { handleSearchTagInput };
+export { FilterTag };

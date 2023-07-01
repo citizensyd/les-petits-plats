@@ -98,4 +98,29 @@ class UstensilesApi extends Api {
   }
 }
 
-export { RecipesApi, IngredientsApi, AppareilsApi, UstensilesApi };
+class IdIngredientsTitleDescriptionApi extends Api {
+  /**
+   *
+   * @param {string} url
+   */
+  constructor(url) {
+    super(url);
+  }
+  async getData() {
+    const { recipes } = await this.get();
+    const all = [];
+    recipes.forEach((element) => {
+      const id = element.id;
+      const title = element.name;
+      const ingredients = [];
+      element.ingredients.forEach((ingredient) => {
+        ingredients.push(ingredient.ingredient);
+      });
+      const description = element.description;
+      all.push({ id, title, ingredients, description });
+    });
+    return all;
+  }
+}
+
+export { RecipesApi, IngredientsApi, AppareilsApi, UstensilesApi, IdIngredientsTitleDescriptionApi };

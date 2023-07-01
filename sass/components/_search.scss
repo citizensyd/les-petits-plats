@@ -27,9 +27,6 @@
     background: none;
     color: inherit;
     cursor: pointer;
-    & img:hover {
-      background-image: url('images/loop-yellow.svg');
-    }
   }
 }
 
@@ -45,3 +42,5 @@
   input:not(:placeholder-shown) + .clear-icon {
     display: inline-block;
   }
+
+

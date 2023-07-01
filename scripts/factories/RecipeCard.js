@@ -6,13 +6,14 @@ class RecipeCard {
     this.ingredients = recipe.ingredients;
     this.time = recipe.time;
     this.unit = recipe.unit;
+    this.id = recipe.id;
     this.sectionRecipe = document.querySelector(".recipes");
     this.displayCard();
   }
 
   displayCard() {
     const htmlContentCard = `
-      <article class="recipe-card">
+      <article class="recipe-card" id="${this.id}">
         <img src="images/photo/${this.image}" alt="${this.title}">
         <section>
           <h2>${this.title}</h2>

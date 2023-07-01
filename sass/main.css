@@ -165,9 +165,6 @@ select {
   color: inherit;
   cursor: pointer;
 }
-.search-button img:hover {
-  background-image: url("images/loop-yellow.svg");
-}
 
 .clear-icon {
   position: absolute;
@@ -204,6 +201,7 @@ input:not(:placeholder-shown) + .clear-icon {
   align-content: center;
   width: 195px;
   height: 56px;
+  max-height: 328px;
   border-radius: 11px;
   background-color: #fff;
   margin-right: 40px;
