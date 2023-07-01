@@ -185,10 +185,12 @@ input:not(:placeholder-shown) + .clear-icon {
 }
 
 .search-tag {
+  position: relative;
   display: flex;
   justify-content: space-between;
   width: 100%;
   height: 106px;
+  z-index: 1;
 }
 .search-tag-container {
   display: flex;
