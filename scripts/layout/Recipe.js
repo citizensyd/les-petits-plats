@@ -9,6 +9,7 @@ class Recipe {
     this.recipesSection = document.querySelector(".recipes");
     this.principalArrayCard = [];
     this.filterTagInstance = filterTagInstance;
+    this.result = allRecipes;
   }
 
   static setInstance(instance) {
@@ -140,27 +141,28 @@ class Recipe {
       !this.principalArrayCard.includes("null")
     ) {
       this.filterTagInstance.filterMenuItemsExclude(this.precedentArray[0]);
-      this.DisplayRecipes(this.precedentArray[0]);
+      this.result = this.precedentArray[0];
+      this.DisplayRecipes(this.result);
     } else if (
       this.precedentArray.length > 1 &&
       this.principalArrayCard.length === 0 &&
       !this.principalArrayCard.includes("null")
     ) {
-      const result = referenceArray.filter((element) => {
+      this.result = referenceArray.filter((element) => {
         return this.precedentArray.every((array) => array.some((item) => item.id === element.id));
       });
-      this.filterTagInstance.filterMenuItemsExclude(result);
-      this.DisplayRecipes(result);
+      this.filterTagInstance.filterMenuItemsExclude(this.result);
+      this.DisplayRecipes(this.result);
     } else if (
       this.precedentArray.length === 1 &&
       this.principalArrayCard.length > 0 &&
       !this.principalArrayCard.includes("null")
     ) {
-      const result = referenceArray.filter((element) => {
+      this.result = referenceArray.filter((element) => {
         return this.principalArrayCard.some((item) => item.id === element.id);
       });
-      this.filterTagInstance.filterMenuItemsExclude(result);
-      this.DisplayRecipes(result);
+      this.filterTagInstance.filterMenuItemsExclude(this.result);
+      this.DisplayRecipes(this.result);
     } else if (
       this.precedentArray.length > 1 &&
       this.principalArrayCard.length > 0 &&
@@ -169,11 +171,11 @@ class Recipe {
       const result1 = referenceArray.filter((element) => {
         return this.precedentArray.every((array) => array.some((item) => item.id === element.id));
       });
-      const result2 = result1.filter((element) => {
+      this.result = result1.filter((element) => {
         return this.principalArrayCard.some((item) => item.id === element.id);
       });
-      this.filterTagInstance.filterMenuItemsExclude(result2);
-      this.DisplayRecipes(result2);
+      this.filterTagInstance.filterMenuItemsExclude(this.result);
+      this.DisplayRecipes(this.result);
     }
   }
 }

@@ -99,8 +99,7 @@ class DisplayListTag {
         const input = event.target.closest("div").querySelector(".search-tag-filter");
         input.value = "";
         event.target.style.display = "none";
-        const idMenu = event.target.closest("div").querySelector("[id*=menu]");
-        this.filterTag.handleSearchTagInput(event);
+        this.filterTagInstance.filterMenuItemsExclude(this.recipesClass.result);
       }
     });
   }
@@ -113,6 +112,7 @@ class DisplayListTag {
       const liTag = document.createElement("li");
       liTag.setAttribute("id", idPrefix + idTagNumber++);
       liTag.textContent = element;
+      liTag.style.display = "block";
       listTag.appendChild(liTag);
     });
   }

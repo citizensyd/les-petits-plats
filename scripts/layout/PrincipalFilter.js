@@ -27,6 +27,7 @@ class PrincipalFilter {
   snagHover() {
     const searchButtonImage = document.getElementById("search-button-image");
     this.input.addEventListener("input", (event) => {
+      console.log(event.target);
       if (event.target.value.length >= 3) {
         searchButtonImage.src = "images/loop-yellow.svg";
         searchButtonImage.addEventListener("click", () => {
