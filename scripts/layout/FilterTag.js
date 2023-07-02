@@ -3,6 +3,7 @@ class FilterTag {
     this.searchTagContainer = document.querySelector(".search-tag-container");
     this.allLi = null;
     this.allLiArrayId = [];
+    this.element = null;
     this.searchTagContainer.addEventListener("input", (event) => {
       this.handleSearchTagInput(event);
     });
@@ -25,17 +26,16 @@ class FilterTag {
 
   // Select correct input menu and send to unscreen li
   handleSearchTagInput(event) {
+    console.log(event.target);
     let input;
     if (event.target.tagName === "INPUT") {
       input = event.target.value.trim();
-    } else {
-      input = event.target.closest("div").querySelector("input").value.trim();
     }
 
     const test = event.target.closest("div");
-    const element = test.querySelectorAll("[id*=menu] li");
+    this.element = test.querySelectorAll("[id*=menu] li[style*='display: block']");
 
-    this.filterMenuItems(element, input);
+    this.filterMenuItems(this.element, input);
   }
 
   // Unscreen element li in menu tag if no include in input
@@ -52,11 +52,14 @@ class FilterTag {
             }
           }
         }
-        if (recipe.name.toLowerCase().match(text)) {
-          if (!this.allLiArrayId.includes(li.id)) {
-            this.allLiArrayId.push(li.id);
+        for (const ustensil of recipe.ustensils) {
+          if (ustensil.toLowerCase().match(text)) {
+            if (!this.allLiArrayId.includes(li.id)) {
+              this.allLiArrayId.push(li.id);
+            }
           }
-        } else if (recipe.description.toLowerCase().match(text)) {
+        }
+        if (recipe.appliance.toLowerCase().match(text)) {
           if (!this.allLiArrayId.includes(li.id)) {
             this.allLiArrayId.push(li.id);
           }

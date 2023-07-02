@@ -1,5 +1,3 @@
-  
-  
   // Redirect to correct address data
   const apiMotor = () => {
     const url = window.location.href;

@@ -27,6 +27,7 @@ class PrincipalFilter {
   snagHover() {
     const searchButtonImage = document.getElementById("search-button-image");
     this.input.addEventListener("input", (event) => {
+      console.log(event.target);
       if (event.target.value.length >= 3) {
         searchButtonImage.src = "images/loop-yellow.svg";
         searchButtonImage.addEventListener("click", () => {
@@ -61,6 +62,7 @@ class PrincipalFilter {
   }
 
   checkInput() {
+    console.time("check-in");
     this.principalArrayCard = [];
     if (this.input.value.length >= 3) {
       const input = new RegExp("\\b" + this.input.value.toLowerCase() + "\\b");
@@ -83,6 +85,7 @@ class PrincipalFilter {
       this.recipesClass.principalArrayCard = this.principalArrayCard;
       this.recipesClass.commonElements();
     }
+    console.time("check-out");
   }
 }
 export { PrincipalFilter };
