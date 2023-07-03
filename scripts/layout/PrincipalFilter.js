@@ -61,17 +61,29 @@ class PrincipalFilter {
   checkInput() {
     console.time("c");
     const inputTest = new RegExp("\\b" + this.input.value.toLowerCase() + "\\b");
-
+  
     this.principalArrayCard = this.arrayOfIngredientsTitleDescription.filter((element) => {
       if (element.ingredients.length > 0) {
         return element.ingredients.some((ingredient) => {
           return ingredient.ingredient.toLowerCase().match(inputTest);
         });
       } else {
-        return element.name.toLowerCase().match(inputTest) || element.description.toLowerCase().match(inputTest);
+        return (
+          element.name.toLowerCase().match(inputTest) ||
+          element.description.toLowerCase().match(inputTest)
+        );
       }
     });
+  
+    if (this.principalArrayCard.length === 0) {
+      this.principalArrayCard.push("null");
+    }
+  
+    this.recipesClass.principalArrayCard = this.principalArrayCard;
+    this.recipesClass.commonElements();
+  
     console.timeEnd("c");
   }
+  
 }
 export { PrincipalFilter };
