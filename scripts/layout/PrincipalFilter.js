@@ -58,23 +58,37 @@ class PrincipalFilter {
     });
   }
 
-  checkInput() {
-    console.log("checkInput");
-    console.time("c");
-    const input = new RegExp("\\b" + this.input.value.toLowerCase() + "\\b");
-    const filteredArray = this.arrayOfIngredientsTitleDescription.filter((element) => {
-      const hasMatchingIngredient = element.ingredients.some((ingredient) =>
-        input.test(ingredient.ingredient.toLowerCase())
-      );
-      const hasMatchingName = input.test(element.name.toLowerCase());
-      const hasMatchingDescription = input.test(element.description.toLowerCase());
-      return hasMatchingIngredient || hasMatchingName || hasMatchingDescription;
-    });
-
-    this.principalArrayCard = filteredArray.length > 0 ? filteredArray : ["null"];
-    this.recipesClass.principalArrayCard = this.principalArrayCard;
-    this.recipesClass.commonElements();
-    console.timeEnd("c");
+    checkInput() {
+      console.time("c");
+      this.principalArrayCard = [];
+      
+      if (this.input.value.length >= 3) {
+        const input = new RegExp("\\b" + this.input.value.toLowerCase() + "\\b");
+        
+        this.arrayOfIngredientsTitleDescription.forEach((element) => {
+          if (element.ingredients.length > 0) {
+            element.ingredients.forEach((ingredient) => {
+              if (ingredient.ingredient.toLowerCase().match(input)) {
+                this.principalArrayCard.push(element);
+              }
+            });
+          } else if (
+            element.name.toLowerCase().match(input) ||
+            element.description.toLowerCase().match(input)
+          ) {
+            this.principalArrayCard.push(element);
+          }
+        });
+        
+        if (this.principalArrayCard.length === 0) {
+          this.principalArrayCard.push("null");
+        }
+        
+        this.recipesClass.principalArrayCard = this.principalArrayCard;
+        this.recipesClass.commonElements();
+      }
+      
+      console.timeEnd("c");
+    }
   }
-}
 export { PrincipalFilter };
