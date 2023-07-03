@@ -27,12 +27,9 @@ class PrincipalFilter {
   snagHover() {
     const searchButtonImage = document.getElementById("search-button-image");
     this.input.addEventListener("input", (event) => {
-      console.log(event.target);
       if (event.target.value.length >= 3) {
         searchButtonImage.src = "images/loop-yellow.svg";
-        searchButtonImage.addEventListener("click", () => {
-          this.checkInput();
-        });
+        this.checkInput();
       } else {
         searchButtonImage.src = "images/loop-grey.svg";
       }
@@ -62,18 +59,22 @@ class PrincipalFilter {
   }
 
   checkInput() {
+    console.log("checkInput");
+    console.time("c");
     const input = new RegExp("\\b" + this.input.value.toLowerCase() + "\\b");
-    const filteredArray = this.arrayOfIngredientsTitleDescription.filter(element => {
-      const hasMatchingIngredient = element.ingredients.some(ingredient => input.test(ingredient.ingredient.toLowerCase()));
+    const filteredArray = this.arrayOfIngredientsTitleDescription.filter((element) => {
+      const hasMatchingIngredient = element.ingredients.some((ingredient) =>
+        input.test(ingredient.ingredient.toLowerCase())
+      );
       const hasMatchingName = input.test(element.name.toLowerCase());
       const hasMatchingDescription = input.test(element.description.toLowerCase());
       return hasMatchingIngredient || hasMatchingName || hasMatchingDescription;
     });
-  
+
     this.principalArrayCard = filteredArray.length > 0 ? filteredArray : ["null"];
     this.recipesClass.principalArrayCard = this.principalArrayCard;
     this.recipesClass.commonElements();
+    console.timeEnd("c");
   }
-  
 }
 export { PrincipalFilter };
