@@ -58,37 +58,20 @@ class PrincipalFilter {
     });
   }
 
-    checkInput() {
-      console.time("c");
-      this.principalArrayCard = [];
-      
-      if (this.input.value.length >= 3) {
-        const input = new RegExp("\\b" + this.input.value.toLowerCase() + "\\b");
-        
-        this.arrayOfIngredientsTitleDescription.forEach((element) => {
-          if (element.ingredients.length > 0) {
-            element.ingredients.forEach((ingredient) => {
-              if (ingredient.ingredient.toLowerCase().match(input)) {
-                this.principalArrayCard.push(element);
-              }
-            });
-          } else if (
-            element.name.toLowerCase().match(input) ||
-            element.description.toLowerCase().match(input)
-          ) {
-            this.principalArrayCard.push(element);
-          }
+  checkInput() {
+    console.time("c");
+    const inputTest = new RegExp("\\b" + this.input.value.toLowerCase() + "\\b");
+
+    this.principalArrayCard = this.arrayOfIngredientsTitleDescription.filter((element) => {
+      if (element.ingredients.length > 0) {
+        return element.ingredients.some((ingredient) => {
+          return ingredient.ingredient.toLowerCase().match(inputTest);
         });
-        
-        if (this.principalArrayCard.length === 0) {
-          this.principalArrayCard.push("null");
-        }
-        
-        this.recipesClass.principalArrayCard = this.principalArrayCard;
-        this.recipesClass.commonElements();
+      } else {
+        return element.name.toLowerCase().match(inputTest) || element.description.toLowerCase().match(inputTest);
       }
-      
-      console.timeEnd("c");
-    }
+    });
+    console.timeEnd("c");
   }
+}
 export { PrincipalFilter };
