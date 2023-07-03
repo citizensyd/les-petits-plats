@@ -29,7 +29,7 @@ class PrincipalFilter {
     this.input.addEventListener("input", (event) => {
       if (event.target.value.length >= 3) {
         searchButtonImage.src = "images/loop-yellow.svg";
-          this.checkInput();
+        this.checkInput();
       } else {
         searchButtonImage.src = "images/loop-grey.svg";
       }
@@ -61,39 +61,34 @@ class PrincipalFilter {
   checkInput() {
     console.time("c");
     this.principalArrayCard = [];
-    
+
     if (this.input.value.length >= 3) {
       const input = new RegExp("\\b" + this.input.value.toLowerCase() + "\\b");
-      
+
       for (let i = 0; i < this.arrayOfIngredientsTitleDescription.length; i++) {
         const element = this.arrayOfIngredientsTitleDescription[i];
-        
-        if (element.ingredients.length > 0) {
-          for (let j = 0; j < element.ingredients.length; j++) {
-            const ingredient = element.ingredients[j];
-            
-            if (ingredient.ingredient.toLowerCase().match(input)) {
-              this.principalArrayCard.push(element);
-            }
+
+        for (let j = 0; j < element.ingredients.length; j++) {
+          const ingredient = element.ingredients[j];
+
+          if (ingredient.ingredient.toLowerCase().match(input)) {
+            this.principalArrayCard.push(element);
           }
-        } else if (
-          element.name.toLowerCase().match(input) ||
-          element.description.toLowerCase().match(input)
-        ) {
+        }
+        if (element.name.toLowerCase().match(input) || element.description.toLowerCase().match(input)) {
           this.principalArrayCard.push(element);
         }
       }
-      
+
       if (this.principalArrayCard.length === 0) {
         this.principalArrayCard.push("null");
       }
-      
+
       this.recipesClass.principalArrayCard = this.principalArrayCard;
       this.recipesClass.commonElements();
     }
-    
+
     console.timeEnd("c");
   }
-  
 }
 export { PrincipalFilter };
