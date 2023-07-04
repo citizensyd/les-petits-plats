@@ -1,7 +1,6 @@
-// generic class for calling a server
+// Generic class for calling a server
 class Api {
   /**
-   *
    * @param {string} url
    */
   constructor(url) {
@@ -11,14 +10,13 @@ class Api {
   async get() {
     return fetch(this._url)
       .then((res) => res.json())
-      .catch((err) => console.log("an error occurs", err));
+      .catch((err) => console.log("An error occurred", err));
   }
 }
 
-// call to api to get recipes
+// Call to API to get recipes
 class RecipesApi extends Api {
   /**
-   *
    * @param {string} url
    */
   constructor(url) {
@@ -31,15 +29,15 @@ class RecipesApi extends Api {
   }
 }
 
-// call to api to get one photographer
+// Call to API to get ingredients
 class IngredientsApi extends Api {
   /**
-   *
    * @param {string} url
    */
   constructor(url) {
     super(url);
   }
+
   async getData() {
     const { recipes } = await this.get();
     const allIngredients = recipes.reduce((accumulator, recipe) => {
@@ -55,14 +53,15 @@ class IngredientsApi extends Api {
   }
 }
 
+// Call to API to get appliances
 class AppareilsApi extends Api {
   /**
-   *
    * @param {string} url
    */
   constructor(url) {
     super(url);
   }
+
   async getData() {
     const { recipes } = await this.get();
     const allAppareils = recipes.reduce((accumulator, recipe) => {
@@ -75,14 +74,16 @@ class AppareilsApi extends Api {
     return allAppareils;
   }
 }
+
+// Call to API to get utensils
 class UstensilesApi extends Api {
   /**
-   *
    * @param {string} url
    */
   constructor(url) {
     super(url);
   }
+
   async getData() {
     const { recipes } = await this.get();
     const allUstensiles = recipes.reduce((accumulator, recipe) => {
@@ -98,14 +99,15 @@ class UstensilesApi extends Api {
   }
 }
 
+// Call to API to get ID, ingredients, title, and description
 class IdIngredientsTitleDescriptionApi extends Api {
   /**
-   *
    * @param {string} url
    */
   constructor(url) {
     super(url);
   }
+
   async getData() {
     const { recipes } = await this.get();
     const all = [];

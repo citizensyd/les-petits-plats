@@ -3,18 +3,29 @@ import { AppareilsApi } from "../api/Api.js";
 import { UstensilesApi } from "../api/Api.js";
 import { apiMotor } from "../api/ApiAdress.js";
 
-//Creation of all li element for one menu
+// Creation of all li element for one menu
 class DisplayListTag {
   constructor(recipeInstance, filterTagInstance) {
+    // Initialize index counter
     this.index = 0;
+
+    // Invoke menuTag method
     this.menuTag();
+
+    // Initialize API address
     this.apiAdress = null;
-    this.inputCross();
+
+    // Get API address from apiMotor function
     this.apiAdress = apiMotor();
+
+    // Get recipe instance and filter tag instance
     this.recipesClass = recipeInstance;
     this.filterTagInstance = filterTagInstance;
 
+    // Invoke displayListTag method
     this.displayListTag();
+
+    // Invoke activeFilter method
     this.activeFilter();
   }
 
@@ -53,6 +64,7 @@ class DisplayListTag {
     });
   }
 
+  // Handle active filters for different menu categories
   activeFilter() {
     this.displayActiveFilter("#ingredients-menu", "#ingredients-selected", "btnIn");
     this.displayActiveFilter("#appareils-menu", "#appareils-selected", "btnAp");
@@ -73,7 +85,7 @@ class DisplayListTag {
       if (target.matches(".search-tag-toggle")) {
         const index = Array.from(btnDrop).indexOf(target);
         if (toggleIndex === 0) {
-          searchTagItems[index].style.height = "fit-content" /* `${searchTagItems[index].scrollHeight}px` */;
+          searchTagItems[index].style.height = "fit-content";
           target.style.transform = "rotate(180deg)";
           toggleIndex++;
         } else {
@@ -105,6 +117,7 @@ class DisplayListTag {
     });
   }
 
+  // Display the list of tags for a specific menu
   async display(menuSelector, api, idPrefix) {
     const listTag = document.querySelector(menuSelector);
     const data = await api.getData();
@@ -117,7 +130,7 @@ class DisplayListTag {
     });
   }
 
-  // initialization of li element of each menu
+  // Initialize the list of tags for each menu
   displayListTag() {
     this.display("#ingredients-menu", new IngredientsApi(this.apiAdress), "in");
     this.display("#appareils-menu", new AppareilsApi(this.apiAdress), "ap");

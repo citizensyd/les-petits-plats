@@ -1,7 +1,8 @@
-import { RecipesApi } from "../api/Api.js";
+ import { RecipesApi } from "../api/Api.js";
 
 class PrincipalFilter {
   constructor(recipeInstance, filterTagInstance) {
+    // DOM elements
     this.allLi = null;
     this.searchTagItems = null;
     this.searchTagContainer = document.querySelector(".search-tag-container");
@@ -9,21 +10,29 @@ class PrincipalFilter {
     this.input = document.querySelector("#search-input");
     this.recipes = document.querySelector(".recipes");
     this.principalInput = document.querySelector("#search-input");
+
+    // Class instances
     this.idIngredientsTitleDescriptionApi = new RecipesApi("/data/recipe.json");
-    this.arrayOfIngredientsTitleDescription = null;
     this.filterTag = filterTagInstance;
     this.recipesClass = recipeInstance;
+
+    // Data
+    this.arrayOfIngredientsTitleDescription = null;
     this.principalArrayCard = [];
     this.allLiArrayId = [];
+
+    // Methods called on startup
     this.getData();
     this.clearInput();
     this.snagHover();
   }
 
+  // Fetch data from the API
   async getData() {
     this.arrayOfIngredientsTitleDescription = await this.idIngredientsTitleDescriptionApi.getRecipes();
   }
 
+  // Handle hover effect on search input field
   snagHover() {
     const searchButtonImage = document.getElementById("search-button-image");
     this.input.addEventListener("input", (event) => {
@@ -38,6 +47,7 @@ class PrincipalFilter {
     });
   }
 
+  // Clear the search input field and reset filtered recipes
   clearInput() {
     const inputElement = document.getElementById("search-input");
     const clearIcon = document.querySelector(".clear-icon");
@@ -60,6 +70,7 @@ class PrincipalFilter {
     });
   }
 
+  // Check the input value and filter recipes based on it
   checkInput() {
     this.principalArrayCard = [];
     if (this.input.value.length >= 3) {
@@ -85,4 +96,5 @@ class PrincipalFilter {
     }
   }
 }
+
 export { PrincipalFilter };

@@ -1,5 +1,6 @@
 class RecipeCard {
   constructor(recipe) {
+    // Recipe properties
     this.image = recipe.image;
     this.title = recipe.name;
     this.description = recipe.description;
@@ -7,10 +8,15 @@ class RecipeCard {
     this.time = recipe.time;
     this.unit = recipe.unit;
     this.id = recipe.id;
+    
+    // DOM element
     this.sectionRecipe = document.querySelector(".recipes");
+
+    // Display the recipe card
     this.displayCard();
   }
 
+  // Display the recipe card in the DOM
   displayCard() {
     const htmlContentCard = `
       <article class="recipe-card" id="${this.id}">
@@ -28,6 +34,7 @@ class RecipeCard {
     this.sectionRecipe.innerHTML += htmlContentCard;
   }
 
+  // Generate HTML for the ingredients list
   generateIngredientsHtml() {
     let html = "";
     this.ingredients.forEach((element) => {
@@ -38,4 +45,5 @@ class RecipeCard {
     return html;
   }
 }
+
 export { RecipeCard };
