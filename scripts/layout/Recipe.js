@@ -2,21 +2,26 @@ import { RecipeCard } from "../factories/RecipeCard.js";
 
 class Recipe {
   constructor(allRecipes, filterTagInstance) {
+    // Recipes data
     this.recipes = allRecipes;
     this.precedentArray = [];
     this.precedentArray.push(this.recipes);
     this.instance = null;
+
+    // DOM element
     this.recipesSection = document.querySelector(".recipes");
+
+    // Array for filtered recipes
     this.principalArrayCard = [];
+
+    // Filter tag instance
     this.filterTagInstance = filterTagInstance;
+
+    // Result array
     this.result = allRecipes;
   }
 
-  static setInstance(instance) {
-    this.instance = instance;
-  }
-
-  // Display recipe card
+  // Display recipe cards
   DisplayRecipes(recipes) {
     this.deleteChild();
     recipes.forEach((element) => {
@@ -24,15 +29,16 @@ class Recipe {
     });
   }
 
+  // Display "No result" message
   displayNoresult() {
     this.deleteChild();
     const messageNoResult = document.createElement("div");
     messageNoResult.classList.add("recipe-message");
-    messageNoResult.textContent = `Aucune recette ne correspond à votre critère… vous pouvez chercher « tarte aux pommes », « poisson », etc.`;
+    messageNoResult.textContent = `No recipes match your criteria... you can search for "apple pie", "fish", etc.`;
     this.recipesSection.appendChild(messageNoResult);
   }
 
-  // Dispatch the display recipes
+  // Dispatch the display recipes based on filter tags
   async filterTagDisplayRecipes() {
     const tagFilter = document.querySelector(".search-tag-active-button:last-child");
     let tagfilterArray = [];
@@ -53,6 +59,7 @@ class Recipe {
     }
   }
 
+  // Reduce the size of the recipes array based on filter tags
   allReduceSize(table, entryTable) {
     let applianceTable = [];
     let ustensilsTable = [];
@@ -70,6 +77,7 @@ class Recipe {
     this.findCommonElements(applianceTable, ustensilsTable, ingredientsTable);
   }
 
+  // Reduce the size of the table based on a specific item key
   reduceTableSize(table, entryTable, itemKey) {
     const reduceTable = [];
     for (const entry of entryTable) {
@@ -92,6 +100,7 @@ class Recipe {
     return reduceTable;
   }
 
+  // Delete child elements from the recipes section
   deleteChild() {
     const recipes = document.querySelector(".recipes");
     while (recipes.firstChild) {
@@ -99,11 +108,13 @@ class Recipe {
     }
   }
 
+  // Remove the last filtered selection and display the previous recipes
   slicePrecedentArray() {
     this.precedentArray.splice(this.precedentArray.length - 1, 1);
     this.commonElements();
   }
 
+  // Find common elements in filtered arrays
   findCommonElements(array1, array2, array3) {
     let newArray = null;
     if (array1.length !== 0) {
@@ -122,17 +133,10 @@ class Recipe {
     }
   }
 
+  // Display the common elements based on filters
   commonElements() {
-    /*     console.log(this.precedentArray); */
     const referenceArray = this.precedentArray[0];
-    /*     console.log(this.precedentArray.length);
-    console.log(this.precedentArray.length === 1);
-    console.log(this.precedentArray.length > 1);
-    console.log(this.principalArrayCard);
-    console.log(this.principalArrayCard.length);
-    console.log(this.principalArrayCard.length > 0);
-    console.log(this.principalArrayCard.length === 0); 
-    console.log(!this.principalArrayCard.includes("null"));*/
+
     if (this.precedentArray.length === 1 && this.principalArrayCard.includes("null")) {
       return this.displayNoresult();
     } else if (

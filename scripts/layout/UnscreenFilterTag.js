@@ -1,5 +1,6 @@
 class UnscreenFilterTag {
   constructor(recipeInstance) {
+    // Initialize variables
     this.idActive = null;
     this.idLi = null;
     this.listMenuSelected = null;
@@ -12,12 +13,19 @@ class UnscreenFilterTag {
     this.index = null;
     this.searchTagActive = document.querySelector(".search-tag-active");
     this.searchTagContainer = document.querySelector(".search-tag-container");
+
+    // Bind event listener method
     this.handleFilterRemoval = this.handleFilterRemoval.bind(this);
+
+    // Add event listener to filter removal actions
     this.searchTagContainer.addEventListener("click", this.handleFilterRemoval);
     this.searchTagActive.addEventListener("click", this.handleFilterRemoval);
+
+    // Get recipe instance
     this.recipesClass = recipeInstance;
   }
 
+  // Rename filter tag buttons after filter removal
   renameFilterTagButton() {
     const searchTagActiveBtn = this.searchTagActive.querySelectorAll(".search-tag-active-button");
     if (searchTagActiveBtn.length === 0) {
@@ -36,6 +44,7 @@ class UnscreenFilterTag {
     }
   }
 
+  // Remove the filter from the corresponding <li> element
   removeFilterFromLi() {
     this.idNumber = this.target.closest("li").id.substring(2);
     const allButtonFilter = Array.from(this.searchTagActive.querySelectorAll(".search-tag-active-button"));
@@ -47,10 +56,12 @@ class UnscreenFilterTag {
     this.renameFilterTagButton();
   }
 
+  // Remove the filter from the active filter list
   removeFilterFromActive() {
     this.liSelected.querySelector(".search-tag-menu-selected-cross").click();
   }
 
+  // Determine the active filter ID and <li> ID
   definedIdActiveIdLi() {
     if (this.listMenu.id === "ingredients-menu") {
       this.idActive = "btnIn";
@@ -65,6 +76,7 @@ class UnscreenFilterTag {
     this.removeFilterFromLi();
   }
 
+  // Find the corresponding <li> element and remove the filter from the active filter list
   definedLi() {
     const menu = this.target.closest("div").id.substring(4, 6);
     this.idNumber = this.target.closest("div").id.substring(6);
@@ -73,6 +85,7 @@ class UnscreenFilterTag {
     this.removeFilterFromActive();
   }
 
+  // Handle filter removal actions
   handleFilterRemoval(event) {
     this.target = event.target;
     if (this.target.matches(".search-tag-menu-selected-cross")) {
@@ -84,4 +97,5 @@ class UnscreenFilterTag {
     }
   }
 }
+
 export { UnscreenFilterTag };
