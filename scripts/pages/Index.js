@@ -13,15 +13,16 @@ class Index {
 
     // Create an instance of Recipes API
     this.recipesApi = new RecipesApi(this.apiAdress);
-
-    // Create an instance of FilterTag
-    this.filterTagInstance = new FilterTag();
   }
-
+  
   // Display all recipes
   async displayAllRecipes() {
+    
     // Fetch recipes from the API
     this.recipes = await this.recipesApi.getRecipes();
+
+    // Create an instance of FilterTag
+    this.filterTagInstance = new FilterTag(this.recipes);
 
     // Create an instance of Recipe and pass the recipes and filter tag instance
     this.recipeInstance = new Recipe(this.recipes, this.filterTagInstance);

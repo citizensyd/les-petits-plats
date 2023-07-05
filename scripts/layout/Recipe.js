@@ -10,6 +10,7 @@ class Recipe {
 
     // DOM element
     this.recipesSection = document.querySelector(".recipes");
+    this.searchButtonImage = document.getElementById("search-button-image");
 
     // Array for filtered recipes
     this.principalArrayCard = [];
@@ -20,7 +21,7 @@ class Recipe {
     // Result array
     this.result = allRecipes;
   }
-
+  
   // Display recipe cards
   DisplayRecipes(recipes) {
     this.deleteChild();
@@ -36,6 +37,7 @@ class Recipe {
     messageNoResult.classList.add("recipe-message");
     messageNoResult.textContent = `No recipes match your criteria... you can search for "apple pie", "fish", etc.`;
     this.recipesSection.appendChild(messageNoResult);
+    this.searchButtonImage.src = "images/loop-red.svg";
   }
 
   // Dispatch the display recipes based on filter tags
@@ -146,7 +148,7 @@ class Recipe {
     ) {
       this.filterTagInstance.filterMenuItemsExclude(this.precedentArray[0]);
       this.result = this.precedentArray[0];
-      this.DisplayRecipes(this.result);
+      return this.DisplayRecipes(this.result);
     } else if (
       this.precedentArray.length > 1 &&
       this.principalArrayCard.length === 0 &&
@@ -156,7 +158,7 @@ class Recipe {
         return this.precedentArray.every((array) => array.some((item) => item.id === element.id));
       });
       this.filterTagInstance.filterMenuItemsExclude(this.result);
-      this.DisplayRecipes(this.result);
+      return this.DisplayRecipes(this.result);
     } else if (
       this.precedentArray.length === 1 &&
       this.principalArrayCard.length > 0 &&
@@ -166,7 +168,7 @@ class Recipe {
         return this.principalArrayCard.some((item) => item.id === element.id);
       });
       this.filterTagInstance.filterMenuItemsExclude(this.result);
-      this.DisplayRecipes(this.result);
+      return this.DisplayRecipes(this.result);
     } else if (
       this.precedentArray.length > 1 &&
       this.principalArrayCard.length > 0 &&
@@ -179,7 +181,7 @@ class Recipe {
         return this.principalArrayCard.some((item) => item.id === element.id);
       });
       this.filterTagInstance.filterMenuItemsExclude(this.result);
-      this.DisplayRecipes(this.result);
+      return this.DisplayRecipes(this.result);
     }
   }
 }

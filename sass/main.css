@@ -359,6 +359,7 @@ input:not(:placeholder-shown) + .clear-icon {
   flex-wrap: wrap;
 }
 .search-tag-active-button {
+  margin-bottom: 20px;
   display: flex;
   align-items: center;
   justify-content: space-between;

@@ -1,4 +1,5 @@
  import { RecipesApi } from "../api/Api.js";
+ import { validateInput, escapeHtml } from "../utils/Security.js"
 
 class PrincipalFilter {
   constructor(recipeInstance, filterTagInstance) {
@@ -10,6 +11,7 @@ class PrincipalFilter {
     this.input = document.querySelector("#search-input");
     this.recipes = document.querySelector(".recipes");
     this.principalInput = document.querySelector("#search-input");
+    this.searchButtonImage = document.getElementById("search-button-image");
 
     // Class instances
     this.idIngredientsTitleDescriptionApi = new RecipesApi("/data/recipe.json");
@@ -20,6 +22,7 @@ class PrincipalFilter {
     this.arrayOfIngredientsTitleDescription = null;
     this.principalArrayCard = [];
     this.allLiArrayId = [];
+    this.escapedInput = null;
 
     // Methods called on startup
     this.getData();
@@ -34,13 +37,20 @@ class PrincipalFilter {
 
   // Handle hover effect on search input field
   snagHover() {
-    const searchButtonImage = document.getElementById("search-button-image");
     this.input.addEventListener("input", (event) => {
       if (event.target.value.length >= 3) {
-        searchButtonImage.src = "images/loop-yellow.svg";
+        const input = this.principalInput.value;
+        const isValid = validateInput(input);
+        this.escapedInput = escapeHtml(input);
+        this.searchButtonImage.src = "images/loop-yellow.svg";
+        if (!isValid) {
+          return this.searchButtonImage.src = "images/loop-red.svg";
+        }
         this.checkInput();
+      } else if (event.target.value.length === 0){
+        this.recipesClass.DisplayRecipes(this.arrayOfIngredientsTitleDescription);
       } else {
-        searchButtonImage.src = "images/loop-grey.svg";
+        this.searchButtonImage.src = "images/loop-grey.svg";
       }
     });
   }
@@ -58,11 +68,11 @@ class PrincipalFilter {
     this.search.addEventListener("click", (event) => {
       event.preventDefault();
       if (event.target.className === "clear-icon") {
-        inputElement.value = "";
         clearIcon.style.display = "none";
         inputElement.value = "";
         this.principalArrayCard = [];
         this.recipesClass.principalArrayCard = this.principalArrayCard;
+        this.searchButtonImage.src = "images/loop-grey.svg";
         this.recipesClass.filterTagDisplayRecipes();
       }
     });
@@ -72,9 +82,8 @@ class PrincipalFilter {
   checkInput() {
     console.time("c");
     this.principalArrayCard = [];
-
-    if (this.input.value.length >= 3) {
-      const input = new RegExp("\\b" + this.input.value.toLowerCase() + "\\b");
+    if (this.escapedInput.length >= 3) {
+      const input = new RegExp("\\b" + this.escapedInput.toLowerCase() + "\\b");
 
       for (let i = 0; i < this.arrayOfIngredientsTitleDescription.length; i++) {
         const element = this.arrayOfIngredientsTitleDescription[i];
